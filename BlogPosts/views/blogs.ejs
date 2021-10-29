@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <%- include partials/head.ejs %>
+
+  <head>
+    <link rel="stylesheet" href="../public/stylesheets/style.css">
+  </head>
+  <title>Create Blogs</title>
+
+  <body>
+    <%- include partials/nav.ejs %>
+    <h1>Create Blogs</h1>
+    <textarea type="box" id="article_title" placeholder="Title"></textarea>
+    <hr/>
+    <textarea  type="box" id="content" placeholder="Content"></textarea>
+    <br/>
+    <br/>
+    <button type="button" id="submit-btn">Submit</button>
+   <script src="../routes/index.js"></script>
+  <%- include partials/foot.ejs %>
+  
+
+  </body>
+</html>
