@@ -1,21 +1,20 @@
-<!DOCTYPE html>
-<html>
+<html lang="en">
   <%- include partials/head.ejs %>
-  <title>View Blogs</title>
-  <body>
-    <%- include partials/nav.ejs %>
-      <h1>Select the Blog to View</h1>
-      <hr/>
-      <ul id="view_blogs">
-          <li>First</li>
-          <li>Second</li>
-          <li>Third</li>
-          <li>Fourth</li>
-          <li>Fifth</li>
-          <li>Sixth</li>
-          <li>Seventh</li>
-      </ul>
-   <script src="../routes/index.js"></script>
+<body>
+  <%- include partials/nav.ejs %>
+  <title>All Blogs</title>
+  <div  id="view_blogs">
+    <h2 class="heading">All Blogs</h2>
+      <% if (blogs.length > 0) { %>
+        <% blogs.forEach(blog => { %>
+          <hr/>
+          <h3 class="title"><%= blog.title %></h3>
+          <p class="content"><%= blog.content %></p>
+        <% }) %>
+        <% } else { %>
+        <p>There are no blogs to display...</p>
+      <% } %>
+  </div>
   <%- include partials/foot.ejs %>
-  </body>
+</body>
 </html>

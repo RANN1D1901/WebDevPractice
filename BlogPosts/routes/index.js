@@ -1,4 +1,3 @@
-var dict={}
 var button= document.getElementById("submit-btn")
 console.log(button)
 button.addEventListener('click',function(e){
@@ -7,14 +6,17 @@ button.addEventListener('click',function(e){
     request.onreadystatechange=function(){
         let article_title=document.getElementById("article_title").value;
         let article_content=document.getElementById("content").value;
-        dict[article_title]=article_content;
-        let keys=Object.keys(dict);
-        var li="";
-        for(var i=0;i<Object.keys(dict).length;i++){
-            li+='<li>'+keys[0]+'</li>';
-        }
-        var ul=document.getElementById("view_blogs");
-        ul.innerHTML=li;
+        console.log(article_content);
+        var blog = new Blog({
+            title:JSON.stringify(article_title),
+            content: JSON.stringify(article_content)
+          });
+          blog.save().then((result)=>{
+            res.send(result)
+          })
+          .catch((err)=>{
+            console.log("Error");
+          })
     }
     request.open('GET',"http://localhost:3000",true);
     request.send(null);

@@ -10,7 +10,16 @@ app.set('view engine','ejs');
 app.set('views','views')
 app.use(express.static(path.join(__dirname)));
 console.log(__dirname)
+const bodyParser = require("body-parser");
 
+/** bodyParser.urlencoded(options)
+ * Parses the text as URL encoded data (which is how browsers tend to send form data from regular forms set to POST)
+ * and exposes the resulting object (containing the keys and values) on req.body
+ */
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.use(bodyParser.json());
 app.use(express.static('public'));
 app.use(express.static('routes'));
 app.use(express.static('views'));
@@ -24,22 +33,26 @@ mongoose.connect(dbUrl).then((result)=> {
   console.log('Express started on port 3000');
   });
 //async task, returns promise
-app.get('/add_blog',(req,res)=>{
+app.post('/add_blog',(req,res)=>{
   var blog = new Blog({
-    title:"First Blog",
-    content: "This is the first blog"
+    title:JSON.stringify(req.body.Title),
+    content: JSON.stringify(req.body.Content)
   });
+  console.log(blog)
   blog.save().then((result)=>{
-    res.send(result)
+    console.log("Added")
+    res.redirect("/blogs")
+
   })
   .catch((err)=>{
-    console.log("Error");
+    console.log(err);
   })
+
 })
 //retrieve the documents: Blog.find, async method, returns promise
 app.get("/all_blogs",(req,res)=>{
   Blog.find().then((result)=>{
-    res.send(result);
+    res.render("view_blogs",{blogs:result});
   })
   .catch((err)=>{
     console.log("Error");
@@ -58,12 +71,7 @@ app.get("/find_blog",(req,res)=>{
 
 app.get("/blogs",(req,res)=>{
   //for next chapter, pass this data to the view: view_blogs, render the html using EJS viewengine
-  Blog.find().then((result)=>{
-    res.send(result);
-  })
-  .catch((err)=>{
-    console.log("Error");
-  })
+  res.render("blogs")
 })
 
 app.get("/about",(req,res)=>{
@@ -75,5 +83,5 @@ app.get("/",(req,res)=>{
 })
 
 app.get("/view_blogs",(req,res)=>{
-  res.render("view_blogs")
+  res.redirect("/all_blogs")
 })
