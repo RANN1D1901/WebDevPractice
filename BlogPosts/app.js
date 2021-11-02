@@ -4,6 +4,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose');
 var Blog = require("../BlogPosts/models/blogs");
+var blogRoutes = require("../BlogPosts/routes/blogRoutes");
 
 var app = express();
 app.set('view engine','ejs');
@@ -105,3 +106,8 @@ app.delete("/blogs/:id",(req,res)=>{
   })
   .catch(err=>{ Console.log(err)});
 })
+
+//blog routes
+app.use(blogRoutes);
+//can be used as 
+//app.use("/blogs", blogRoutes);
