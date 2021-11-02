@@ -4,12 +4,13 @@
   <%- include partials/nav.ejs %>
   <title>All Blogs</title>
   <div  id="view_blogs">
-    <h2 class="heading">All Blogs</h2>
+    <h2 class="heading">All Blogs: Click to Read</h2>
       <% if (blogs.length > 0) { %>
         <% blogs.forEach(blog => { %>
           <hr/>
-          <h3 class="title"><%= blog.title %></h3>
-          <p class="content"><%= blog.content %></p>
+          <a class="id" href="/blogs/<%= blog._id %>">
+          <h3 class="title" ><%= blog.title %></h3>
+          </a>
         <% }) %>
         <% } else { %>
         <p>There are no blogs to display...</p>

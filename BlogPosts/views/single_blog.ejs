@@ -1,0 +1,27 @@
+<html lang="en">
+  <%- include partials/head.ejs %>
+<body>
+  <%- include partials/nav.ejs %>
+  <title></title>
+  <div  id="view_blogs">
+    <h2 class="heading"><%= blogs.title %></h2>
+          <hr/>
+          <h3 class="content" ><%= blogs.content %></h3>
+          <button class="delete" data-doc="<%= blogs._id %>">Delete</button>
+  </div>
+  <%- include partials/foot.ejs %>
+    <script>
+        const remove=document.querySelector("button.delete");
+        remove.addEventListener('click',(e)=>{
+            const endpoint= `/blogs/${remove.dataset.doc}`;
+            fetch(endpoint,{
+                method:'DELETE'
+            })
+            .then((response)=>response.json())
+            .then((data)=>window.location.href=data.redirect)
+            .catch(err=>Console.log(err));
+        })
+
+    </script>
+</body>
+</html>

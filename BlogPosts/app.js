@@ -11,6 +11,7 @@ app.set('views','views')
 app.use(express.static(path.join(__dirname)));
 console.log(__dirname)
 const bodyParser = require("body-parser");
+const { Console } = require('console');
 
 /** bodyParser.urlencoded(options)
  * Parses the text as URL encoded data (which is how browsers tend to send form data from regular forms set to POST)
@@ -84,4 +85,23 @@ app.get("/",(req,res)=>{
 
 app.get("/view_blogs",(req,res)=>{
   res.redirect("/all_blogs")
+})
+
+app.get("/blogs/:id",(req,res)=>{
+  Blog.findById(req.params.id).then((result)=>{
+    res.render("single_blog",{blogs:result});
+  })
+  .catch((err)=>{
+    console.log("Error");
+  })
+})
+
+
+app.delete("/blogs/:id",(req,res)=>{
+  const id=req.params.id;
+  Blog.findByIdAndDelete(id)
+  .then(result=>{
+    res.json({redirect:"/all_blogs"});
+  })
+  .catch(err=>{ Console.log(err)});
 })
