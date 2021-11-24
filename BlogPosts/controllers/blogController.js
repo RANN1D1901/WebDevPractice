@@ -61,7 +61,7 @@ const delete_blog=(req,res)=>{
   }
 //homepage
 const home_app =(req,res)=>{
-        res.render("home")
+    res.render("home")
 }
 //aboutpage
 const about_page = (req,res)=>{

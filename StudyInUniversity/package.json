@@ -1,0 +1,11 @@
+{
+  "name": "studyinuniversity",
+  "version": "1.0.0",
+  "description": "University Application",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Navdeep Singh Randhawa",
+  "license": "ISC"
+}
