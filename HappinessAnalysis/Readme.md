@@ -5,3 +5,6 @@ This app builds API endpoints and UI to visualise Happiness Report csv data retr
 <p>Install Docker for Your OS: https://docs.docker.com/desktop/ </p>
 <h2>Run commands:</h2>
 <p>docker compose up</p>
+
+<h3>Backend Flask Server is running on: localhost:8000</h3>
+<h3>Frontend React Server is running on: localhost:3000</h3>
