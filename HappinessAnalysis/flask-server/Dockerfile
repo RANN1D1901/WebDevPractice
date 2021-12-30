@@ -1,4 +1,4 @@
 FROM python:3.9.1
-ADD . /python-flask
-WORKDIR /python-flask
+ADD . /app
+WORKDIR /app
 RUN pip install -r requirements.txt

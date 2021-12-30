@@ -1,0 +1,21 @@
+version: "3.8"
+services:
+  app:
+    container_name: app
+    build: ./flask-server
+    command: python app.py
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/flask-server
+
+  client:
+    container_name: client
+    build: ./front-end
+    command: npm start
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/front-end
+    links:
+      - app

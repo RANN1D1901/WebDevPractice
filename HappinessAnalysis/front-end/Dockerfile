@@ -1,4 +1,4 @@
 FROM node
-ADD . /front-end
-WORKDIR /front-end
+ADD . /client
+WORKDIR /client
 RUN npm install
