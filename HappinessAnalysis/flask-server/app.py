@@ -5,13 +5,12 @@ import pandas as pd
 import json
 
 app = Flask(__name__)
-client = MongoClient("localhost", 27017, maxPoolSize = 50)
-print(client)
+client = MongoClient('mongodb://localhost:27017/')
 DB = client["HappinessReport"]
-print(DB)
+
 @app.route("/")
 def index():
-    return "This is Home!"
+    return "Hi Connected"
 @app.route("/hello")
 def hello():
     return "Hello Docker At last working"
@@ -24,5 +23,23 @@ def uploadCSV():
     collection = DB[filePath]
     collection.insert_many(data)
     return("Added Data to database")
+@app.route("/post")
+def post():
+    import datetime
+    post = {"author": "Mike",
+        "text": "My first blog post!",
+        "tags": ["mongodb", "python", "pymongo"],
+        "date": datetime.datetime.utcnow()}
+    posts = DB.posts
+    post_id = posts.insert_one(post).inserted_id
+    return(post_id)
+    
+@app.route("/files")
+def allFiles():
+    print(DB)
+    collection = DB['2019.csv']
+    return (collection)
+    
+
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0',port= 8000)
